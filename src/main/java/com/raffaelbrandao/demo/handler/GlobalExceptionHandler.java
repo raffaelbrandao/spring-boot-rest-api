@@ -17,13 +17,18 @@ import java.lang.reflect.UndeclaredThrowableException;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
-    @Resource private MessageSource messageSource;
+    @Resource
+    private MessageSource messageSource;
+
     private HttpHeaders httpHeaders() {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         return headers;
-    };
-    private ErrorResponse errorResponse(String message, HttpStatus httpStatus){
+    }
+
+    ;
+
+    private ErrorResponse errorResponse(String message, HttpStatus httpStatus) {
         ErrorResponse error = new ErrorResponse();
         error.setStatus("error");
         error.setStatusCode(httpStatus.value());
@@ -31,9 +36,10 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
         return error;
     }
+
     @ExceptionHandler(Exception.class)
-    private ResponseEntity<Object> handleGeneral(Exception e, WebRequest request){
-        if(e.getClass().isAssignableFrom(UndeclaredThrowableException.class)){
+    private ResponseEntity<Object> handleGeneral(Exception e, WebRequest request) {
+        if (e.getClass().isAssignableFrom(UndeclaredThrowableException.class)) {
             UndeclaredThrowableException exception = (UndeclaredThrowableException) e;
 
             return handleBusinessException((BusinessException) exception.getUndeclaredThrowable(), request);

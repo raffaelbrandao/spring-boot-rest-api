@@ -38,7 +38,7 @@ public class OpenAPIConfig {
     private String terms;
 
     @Bean
-    public OpenAPI openAPI(){
+    public OpenAPI openAPI() {
         Contact contact = new Contact()
                 .name(this.contactName)
                 .email(this.contactEmail)
