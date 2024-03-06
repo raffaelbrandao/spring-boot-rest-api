@@ -1,28 +1,35 @@
 package com.raffaelbrandao.demo.services;
 
-import com.raffaelbrandao.demo.models.User;
+import com.raffaelbrandao.demo.models.UserEntity;
 import com.raffaelbrandao.demo.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class UserService {
-    @Autowired private UserRepository userRepository;
+    @Autowired
+    PasswordEncoder passwordEncoder;
+    @Autowired
+    private UserRepository userRepository;
 
-    public List<User> findAll(){
+    public List<UserEntity> findAll() {
         return null;
     }
 
-    public User findByUsername(String username) {
+    public UserEntity findByUsername(String username) {
         return null;
     }
 
-    public void save(User user) {
+    public void save(UserEntity user) {
+        String password = user.getPassword();
+        user.setPassword(passwordEncoder.encode(password));
+        userRepository.save(user);
     }
 
-    public User update(User user) {
+    public UserEntity update(UserEntity user) {
         return null;
     }
 
