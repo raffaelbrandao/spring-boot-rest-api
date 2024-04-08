@@ -16,11 +16,11 @@ public class UserService {
     private UserRepository userRepository;
 
     public List<UserEntity> findAll() {
-        return null;
+        return userRepository.findAll();
     }
 
     public UserEntity findByUsername(String username) {
-        return null;
+        return userRepository.findByUsername(username);
     }
 
     public void save(UserEntity user) {
@@ -30,9 +30,10 @@ public class UserService {
     }
 
     public UserEntity update(UserEntity user) {
-        return null;
+        return userRepository.save(user);
     }
 
     public void delete(Long id) {
+        userRepository.deleteById(id);
     }
 }
